@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace SalesWebMvc.Models
 {
     public class Department
     {
         public int Id { get; set; }
+
+        [Display(Name = "Nome")]
+        [Required(ErrorMessage = "{0} é obrigatório")]
         public string Name { get; set; }
         public ICollection<Seller> Sellers { get; set; } = new List<Seller>();
 
