@@ -37,8 +37,6 @@ namespace SalesWebMvc.Controllers
 
         public async Task<IActionResult> GroupingSearch(DateTime? minDate, DateTime? maxDate)
         {
-            try
-            {
                 if (!minDate.HasValue)
                     minDate = new DateTime(DateTime.Now.Year, 1, 1);
                 if (!maxDate.HasValue)
@@ -47,12 +45,6 @@ namespace SalesWebMvc.Controllers
                 ViewData["maxDate"] = maxDate.Value.ToString("yyyy-MM-dd");
                 var result = await _salesRecordService.FindByDateGroupingAsync(minDate, maxDate);
                 return View(result);
-            }
-            catch
-            {
-                string message = "Página temporariamente indisponível.";
-                return RedirectToAction(nameof(Error), new { message = message });
-            }
         }
 
         public IActionResult Error(string message)
